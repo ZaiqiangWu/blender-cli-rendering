@@ -18,7 +18,7 @@ fi
 mkdir -p ${OUT_DIR}
 
 # Run the scripts
-blender --background -cycles-device CPU -noaudio --python ./01_cube.py --render-frame 1 -- ${OUT_DIR}/01_cube_ ${RESOLUTION} ${SAMPLINGS}
+blender --background -noaudio --python ./01_cube.py --render-frame 1 -- ${OUT_DIR}/01_cube_ ${RESOLUTION} ${SAMPLINGS}
 #blender --background -noaudio --python ./10_mocap.py ${ANIM_FRAMES_OPTION} -- ./assets/motion/102_01.bvh ${OUT_DIR}/10/frame_ ${RESOLUTION} ${SAMPLINGS}
 #blender --background -noaudio --python ./12_cloth.py ${ANIM_FRAMES_OPTION} -- ${OUT_DIR}/12/frame_ ${RESOLUTION} ${SAMPLINGS}
 
