@@ -104,6 +104,65 @@ def set_scene_objects() -> bpy.types.Object:
     return focus_target
 
 
+def create_armature_from_bvh(bvh_path: str) -> bpy.types.Object:
+    global_scale = 0.056444  # This value needs to be changed depending on the motion data
+
+    bpy.ops.import_anim.bvh(filepath=bvh_path,
+                            axis_forward='-Z',
+                            axis_up='Y',
+                            target='ARMATURE',
+                            global_scale=global_scale,
+                            frame_start=1,
+                            use_fps_scale=True,
+                            update_scene_fps=False,
+                            update_scene_duration=True)
+    armature = bpy.context.object
+    return armature
+
+
+def build_scene(scene: bpy.types.Scene, input_bvh_path: str) -> bpy.types.Object:
+
+    # Build a concrete material for the floor and the wall
+    add_named_material("Concrete07", scale=(0.25, 0.25, 0.25))
+
+    # Build a metal material for the humanoid body
+    mat = utils.add_material("BlueMetal", use_nodes=True, make_node_tree_empty=True)
+    output_node = mat.node_tree.nodes.new(type='ShaderNodeOutputMaterial')
+    principled_node = mat.node_tree.nodes.new(type='ShaderNodeBsdfPrincipled')
+    principled_node.inputs['Base Color'].default_value = (0.1, 0.2, 0.7, 1.0)
+    principled_node.inputs['Metallic'].default_value = 0.9
+    principled_node.inputs['Roughness'].default_value = 0.1
+    mat.node_tree.links.new(principled_node.outputs['BSDF'], output_node.inputs['Surface'])
+    utils.arrange_nodes(mat.node_tree)
+
+    # Import the motion file and create a humanoid object
+    armature = create_armature_from_bvh(bvh_path=input_bvh_path)
+    armature_mesh = utils.create_armature_mesh(scene, armature, 'Mesh')
+    armature_mesh.data.materials.append(mat)
+
+    # Create a floor object
+    current_object = utils.create_plane(size=16.0, name="Floor")
+    current_object.data.materials.append(bpy.data.materials["Concrete07"])
+
+    # Create a wall object
+    current_object = utils.create_plane(size=16.0, name="Wall")
+    current_object.data.materials.append(bpy.data.materials["Concrete07"])
+    current_object.location = (0.0, 6.0, 0.0)
+    current_object.rotation_euler = (0.5 * math.pi, 0.0, 0.0)
+
+    # Create a target object for camera work
+    bpy.ops.object.empty_add(location=(0.0, 0.0, 0.8))
+    focus_target = bpy.context.object
+    utils.add_copy_location_constraint(copy_to_object=focus_target,
+                                       copy_from_object=armature,
+                                       use_x=True,
+                                       use_y=True,
+                                       use_z=False,
+                                       bone_name='Hips')
+
+    return focus_target
+
+
 # Args
 output_file_path = bpy.path.relpath(str(sys.argv[sys.argv.index('--') + 1]))
 resolution_percentage = int(sys.argv[sys.argv.index('--') + 2])
@@ -121,6 +180,8 @@ utils.set_animation(scene, fps=24, frame_start=1, frame_end=48)
 
 ## Object
 focus_target_object = set_scene_objects()
+input_bvh_path = "./assets/motion/102_01.bvh"
+focus_target_object = build_scene(scene, input_bvh_path)
 
 ## Camera
 camera_object = utils.create_camera(location=(0.0, -12.5, 2.2))
