@@ -148,6 +148,7 @@ def build_scene(scene: bpy.types.Scene, input_bvh_path: str) -> bpy.types.Object
     armature = create_armature_from_bvh(bvh_path=input_bvh_path)
     armature_mesh = utils.create_armature_mesh(scene, armature, 'Mesh')
     armature_mesh.data.materials.append(mat)
+    bpy.context.view_layer.objects.active =armature_mesh
 
     if bpy.context.object is not None:
         # 为当前活动对象添加一个简化修改器
