@@ -6,6 +6,7 @@ import sys
 import math
 import os
 
+print(sys.version_info)
 
 
 working_dir_path = os.path.dirname(os.path.abspath(__file__))
@@ -179,10 +180,10 @@ utils.clean_objects()
 utils.set_animation(scene, fps=24, frame_start=1, frame_end=48)
 
 ## Object
-focus_target_object = set_scene_objects()
+
 input_bvh_path = "./assets/motion/102_01.bvh"
 focus_target_object = build_scene(scene, input_bvh_path)
-
+focus_target_object = set_scene_objects()
 ## Camera
 camera_object = utils.create_camera(location=(0.0, -12.5, 2.2))
 
