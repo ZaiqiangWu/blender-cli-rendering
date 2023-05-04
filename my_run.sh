@@ -11,7 +11,7 @@ TEST=true
 if ${TEST}; then
   RESOLUTION=10
   SAMPLINGS=16
-  ANIM_FRAMES_OPTION="--render-frame 1..5"
+  ANIM_FRAMES_OPTION="--render-anim"#"--render-frame 1..5"
 fi
 
 # Create the output directory
