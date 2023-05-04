@@ -90,8 +90,8 @@ def set_scene_objects() -> bpy.types.Object:
     current_object.data.materials.append(bpy.data.materials["Fabric03"])
     bpy.ops.object.modifier_add(type='COLLISION')
     # Keyframes
-    current_object.location = (0.0, 0.0, 0.2)
-    current_object.scale = (0.0, 0.0, 0.0)
+    current_object.location = (0.0, 0.0, 1.0)
+    current_object.scale = (1.0, 1.0, 1.0)
     current_object.rotation_euler = (0.0, 0.0, -math.pi * (360.0 * 3.0 + 60.0) / 180.0)
     current_object.keyframe_insert(data_path='location', frame=4)
     current_object.keyframe_insert(data_path='scale', frame=4)
@@ -99,9 +99,9 @@ def set_scene_objects() -> bpy.types.Object:
     current_object.location = (0.0, 0.0, 1.0)
     current_object.scale = (1.0, 1.0, 1.0)
     current_object.rotation_euler = (0.0, 0.0, -math.pi * 60.0 / 180.0)
-    current_object.keyframe_insert(data_path='location', frame=42)
-    current_object.keyframe_insert(data_path='scale', frame=42)
-    current_object.keyframe_insert(data_path='rotation_euler', frame=42)
+    current_object.keyframe_insert(data_path='location', frame=56)
+    current_object.keyframe_insert(data_path='scale', frame=56)
+    current_object.keyframe_insert(data_path='rotation_euler', frame=56)
 
     if bpy.app.version >= (2, 80, 0):
         bpy.ops.mesh.primitive_grid_add(x_subdivisions=75, y_subdivisions=75, size=3.0, location=(0.0, 0.0, 2.75))
