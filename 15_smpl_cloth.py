@@ -32,6 +32,14 @@ texture_paths = {
         "normal": os.path.join(working_dir_path, "assets/cc0textures.com/[2K]Fabric03/Fabric03_nrm.jpg"),
         "roughness": os.path.join(working_dir_path, "assets/cc0textures.com/[2K]Fabric03/Fabric03_rgh.jpg"),
     },
+    "Concrete07": {
+        "ambient_occlusion": os.path.join(working_dir_path, "assets/cc0textures.com/[2K]Concrete07/Concrete07_AO.jpg"),
+        "color": os.path.join(working_dir_path, "assets/cc0textures.com/[2K]Concrete07/Concrete07_col.jpg"),
+        "displacement": os.path.join(working_dir_path, "assets/cc0textures.com/[2K]Concrete07/Concrete07_disp.jpg"),
+        "metallic": "",
+        "normal": os.path.join(working_dir_path, "assets/cc0textures.com/[2K]Concrete07/Concrete07_nrm.jpg"),
+        "roughness": os.path.join(working_dir_path, "assets/cc0textures.com/[2K]Concrete07/Concrete07_rgh.jpg"),
+    }
 }
 
 
