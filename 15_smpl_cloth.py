@@ -5,13 +5,7 @@ import bpy
 import sys
 import math
 import os
-import pip
-try:
-    import trimesh
 
-except ImportError:
-    pip.main(['install', 'trimesh', '--user'])
-    import trimesh
 
 
 working_dir_path = os.path.dirname(os.path.abspath(__file__))
