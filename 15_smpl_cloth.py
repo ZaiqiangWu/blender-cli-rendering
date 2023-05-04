@@ -148,7 +148,8 @@ def build_scene(scene: bpy.types.Scene, input_bvh_path: str) -> bpy.types.Object
     armature = create_armature_from_bvh(bvh_path=input_bvh_path)
     armature_mesh = utils.create_armature_mesh(scene, armature, 'Mesh')
     armature_mesh.data.materials.append(mat)
-    bpy.ops.object.modifier_add(type='COLLISION')
+    #bpy.ops.object.modifier_add(type='COLLISION')
+    armature_mesh.modifier_add(type='COLLISION')
 
     # Create a floor object
     current_object = utils.create_plane(size=16.0, name="Floor")
