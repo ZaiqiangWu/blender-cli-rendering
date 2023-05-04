@@ -205,7 +205,7 @@ world = scene.world
 utils.clean_objects()
 
 ## Animation
-utils.set_animation(scene, fps=24, frame_start=1, frame_end=48)
+utils.set_animation(scene, fps=24, frame_start=1, frame_end=100)
 
 ## Object
 
