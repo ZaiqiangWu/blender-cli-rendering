@@ -86,23 +86,6 @@ def set_scene_objects() -> bpy.types.Object:
 
     set_floor_and_lights()
 
-    current_object = utils.create_smooth_monkey(location=(0.0, 0.0, 1.0))
-    current_object.data.materials.append(bpy.data.materials["Fabric03"])
-    bpy.ops.object.modifier_add(type='COLLISION')
-    # Keyframes
-    current_object.location = (0.0, 0.0, 1.0)
-    current_object.scale = (1.0, 1.0, 1.0)
-    current_object.rotation_euler = (0.0, 0.0, -math.pi * (360.0 * 3.0 + 60.0) / 180.0)
-    current_object.keyframe_insert(data_path='location', frame=4)
-    current_object.keyframe_insert(data_path='scale', frame=4)
-    current_object.keyframe_insert(data_path='rotation_euler', frame=4)
-    current_object.location = (0.0, 0.0, 1.0)
-    current_object.scale = (1.0, 1.0, 1.0)
-    current_object.rotation_euler = (0.0, 0.0, -math.pi * 60.0 / 180.0)
-    current_object.keyframe_insert(data_path='location', frame=56)
-    current_object.keyframe_insert(data_path='scale', frame=56)
-    current_object.keyframe_insert(data_path='rotation_euler', frame=56)
-
     if bpy.app.version >= (2, 80, 0):
         bpy.ops.mesh.primitive_grid_add(x_subdivisions=75, y_subdivisions=75, size=3.0, location=(0.0, 0.0, 2.75))
     else:
@@ -206,7 +189,7 @@ build_scene(scene, input_bvh_path)
 bpy.ops.object.empty_add(location=(0.0, -0.75, 1.05))
 focus_target = bpy.context.object
 focus_target_object = focus_target
-set_floor_and_lights()
+set_scene_objects()
 ## Camera
 camera_object = utils.create_camera(location=(0.0, -12.5, 2.2))
 
