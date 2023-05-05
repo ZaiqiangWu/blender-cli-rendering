@@ -7,9 +7,9 @@ SAMPLINGS=128
 ANIM_FRAMES_OPTION="--render-anim"
 
 # Make this "true" when testing the scripts
-TEST=True
+TEST=true
 if ${TEST}; then
-  RESOLUTION=10
+  RESOLUTION=30
   SAMPLINGS=16
   ANIM_FRAMES_OPTION="--render-anim" #"--render-frame 1..5"
 fi
