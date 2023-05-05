@@ -179,17 +179,9 @@ def build_scene(scene: bpy.types.Scene, input_bvh_path: str) -> bpy.types.Object
     current_object.location = (0.0, 6.0, 0.0)
     current_object.rotation_euler = (0.5 * math.pi, 0.0, 0.0)
 
-    # Create a target object for camera work
-    bpy.ops.object.empty_add(location=(0.0, 0.0, 0.8))
-    focus_target = bpy.context.object
-    utils.add_copy_location_constraint(copy_to_object=focus_target,
-                                       copy_from_object=armature,
-                                       use_x=True,
-                                       use_y=True,
-                                       use_z=False,
-                                       bone_name='Hips')
 
-    return focus_target
+
+
 
 
 # Args
@@ -209,9 +201,11 @@ utils.set_animation(scene, fps=24, frame_start=1, frame_end=100)
 
 ## Object
 
-#input_bvh_path = "./assets/motion/102_01.bvh"
-#focus_target_object = build_scene(scene, input_bvh_path)
-focus_target_object = set_scene_objects()
+input_bvh_path = "./assets/motion/102_01.bvh"
+build_scene(scene, input_bvh_path)
+bpy.ops.object.empty_add(location=(0.0, -0.75, 1.05))
+focus_target = bpy.context.object
+focus_target_object = focus_target
 ## Camera
 camera_object = utils.create_camera(location=(0.0, -12.5, 2.2))
 
