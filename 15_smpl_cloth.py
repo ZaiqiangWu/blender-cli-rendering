@@ -206,6 +206,7 @@ build_scene(scene, input_bvh_path)
 bpy.ops.object.empty_add(location=(0.0, -0.75, 1.05))
 focus_target = bpy.context.object
 focus_target_object = focus_target
+set_floor_and_lights()
 ## Camera
 camera_object = utils.create_camera(location=(0.0, -12.5, 2.2))
 
